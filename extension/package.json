@@ -1,0 +1,88 @@
+{
+  "name": "distraction-diary",
+  "displayName": "Distraction Diary",
+  "description": "Records where you were in your code when you got distracted (window focus loss or idle time) and lets you teleport straight back.",
+  "version": "0.1.0",
+  "publisher": "launchverse",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Productivity"
+  ],
+  "keywords": [
+    "distraction",
+    "focus",
+    "productivity",
+    "cursor",
+    "idle",
+    "history"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:distractionDiary.jumpToRecord",
+    "onView:distractionDiary"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "distractionDiary.jumpToRecord",
+        "title": "Jump to Recorded Location",
+        "category": "Distraction Diary"
+      }
+    ],
+    "viewContainers": {
+      "activitybar": [
+        {
+          "id": "distractionDiary",
+          "title": "Distraction Diary",
+          "icon": "./resources/distraction-diary.svg"
+        }
+      ]
+    },
+    "views": {
+      "distractionDiary": [
+        {
+          "id": "distractionDiary",
+          "name": "Diary",
+          "icon": "./resources/distraction-diary.svg"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Distraction Diary",
+      "properties": {
+        "distractionDiary.idleTimeoutMinutes": {
+          "type": "number",
+          "default": 3,
+          "minimum": 0,
+          "description": "Minutes of inactivity before an idle distraction is recorded. Set to 0 to disable idle tracking."
+        },
+        "distractionDiary.recordFocusLoss": {
+          "type": "boolean",
+          "default": true,
+          "description": "Record a distraction every time the VS Code window loses focus."
+        },
+        "distractionDiary.maxRecords": {
+          "type": "number",
+          "default": 200,
+          "minimum": 1,
+          "description": "Maximum number of distraction records to keep in the session diary."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.5.4"
+  }
+}

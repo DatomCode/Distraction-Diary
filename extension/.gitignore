@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Compiled extension output
+out/
+
+# Extension packaging artifacts
+*.vsix
+
+# Logs and misc
+*.log
+.DS_Store
